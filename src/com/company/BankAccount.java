@@ -2,14 +2,19 @@ package com.company;
 
 public class BankAccount {
 
-    private int accountNumber; //
+    private String accountNumber; //
     private double actionAmount;
     //int actionAmount handles any transaction amount throughout the program.
     private double balance;
     //int balance
     private String customerName;
     private String customerEmail;
-    private double phoneNumber;
+    private String phoneNumber;
+
+    public String accountNumber() {
+        this.accountNumber = accountNumber;
+        return this.accountNumber;
+    }
 
     /* The depositIntoBalance() method,
     which acts as a setter, is used to
