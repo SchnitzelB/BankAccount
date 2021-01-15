@@ -11,7 +11,7 @@ public class BankAccount {
     private String customerEmail;
     private String phoneNumber;
 
-    public String accountNumber() {
+    public String accountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
         return this.accountNumber;
     }
