@@ -3,7 +3,7 @@ package com.company;
 public class BankAccount {
 
     private String accountNumber; //
-    private double actionAmount;
+    //private double actionAmount;
     //int actionAmount handles any transaction amount throughout the program.
     private double balance;
     //int balance
@@ -11,9 +11,74 @@ public class BankAccount {
     private String customerEmail;
     private String phoneNumber;
 
-    public String accountNumber(String accountNumber) {
+    // Constructor creation
+    // Used to initialized the object being created.
+    public BankAccount() {
+        this("56789", 2.50, "Default name", "Default address", "Default phone");
+        System.out.println("Empty constructor called");
+    }
+
+    /* Default (Empty) Constructors
+    * Default constructors are called only when the parameters, when initializing the object
+    * in the main class, are left empty.
+    * Default constructors are not necessary, but are always helpful to determine bugs.
+    * */
+
+    public BankAccount(String customerName, String customerEmail, String phoneNumber) {
+        this("99999",100.55,customerName,customerEmail,phoneNumber);
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.phoneNumber = phoneNumber;
+    }
+
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
-        return this.accountNumber;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    // Do your initialization in your one main constructor, and the other constructor, will
+    // call the main constructor to avoid repetition.
+    public BankAccount(String number, double balance, String customerName, String customerEmail,
+                       String phoneNumber) {
+        System.out.println("Account constructor with parameters called");
+        this.accountNumber = number;
+        this.balance = balance;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void accountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+        System.out.println(accountNumber);
     }
 
     /* The depositIntoBalance() method,
@@ -21,14 +86,11 @@ public class BankAccount {
     deposit funds into the user's account,
     e.g. adding to the int balance.
      */
-    public double depositIntoBalance(double actionAmount, double balance) {
+    public void depositIntoBalance(double depositAmount) {
         // Makes the instance variable double balance == double balance from the parameter.
-        this.balance = balance;
-        // Makes the instance variable double actionAmount == double actionAmount from the parameter.
-        this.actionAmount = actionAmount;
         // This adds actionAmount to balance
-        this.balance += this.actionAmount;
-        return this.balance;
+        this.balance += depositAmount;
+        System.out.println("Deposit of " + depositAmount + " made. New available balance: $" + this.balance);
     }
 
     //The getBalance() method is used to return the current balance to the user.
@@ -36,16 +98,13 @@ public class BankAccount {
         return this.balance;
     }
 
-    public double withdrawlFromBalance(double actionAmount, double balance) {
-        this.balance = balance;
-        this.actionAmount = actionAmount;
-        if (this.actionAmount > this.balance) {
-            System.out.println("INSUFFICIENT FUNDS ALERT");
-            return this.balance;
+    public void withdrawalFromBalance(double withdrawalAmount) {
+        if (this.balance - withdrawalAmount < 0) {
+            System.out.println("INSUFFICIENT FUNDS ALERT. " +
+                    "Available balance: $" + this.balance);
         } else {
-            System.out.println("$" + this.actionAmount + " have been successfully deposited.");
-            this.balance -= this.actionAmount;
-            return this.balance;
+            this.balance -= withdrawalAmount;
+            System.out.println("$" + withdrawalAmount + " have been successfully withdrawn. Remaining balance: $" + this.balance);
         }
     }
 
